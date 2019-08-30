@@ -1,0 +1,11 @@
+version: '3'
+services:
+  front.service:
+    container_name: hockey-dashboard
+    build: ./
+    volumes:
+      - .:/app
+    ports:
+      - "8082:8082"
+    tty: true
+    stdin_open: true
