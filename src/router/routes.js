@@ -11,6 +11,10 @@ const routes = [
       { path: 'matches', component: () => import('pages/Matches.vue') },
       { path: 'rank', component: () => import('pages/Rank.vue') }
     ]
+  },
+  {
+    path: '/login',
+    component: () => import('pages/Login.vue')
   }
 ]
 
