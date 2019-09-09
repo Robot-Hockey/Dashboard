@@ -21,4 +21,5 @@ build:
 eslint:
   stage: lint
   script:
-    - yarn run lint
+    - npm install --progress=false
+    - npm run lint
