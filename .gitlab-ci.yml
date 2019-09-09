@@ -1,0 +1,24 @@
+image: node:carbon-alpine
+
+stages:
+  - build
+  - lint
+
+cache:
+  paths:
+    - node_modules/
+
+build:
+  stage: build
+  script:
+    - npm install -g @quasar/cli
+    - quasar build
+  artifacts:
+    expire_in: 1 week
+    paths:
+      - dist
+
+eslint:
+  stage: lint
+  script:
+    - yarn run lint
