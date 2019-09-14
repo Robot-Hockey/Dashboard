@@ -15,8 +15,7 @@
         <q-toolbar-title>
           Web Dashboard
         </q-toolbar-title>
-
-        <!-- <div>Quasar v{{ $q.version }}</div> -->
+        <q-btn  @click="logout()" round dense icon="exit_to_app" class="q-mr-xs" />
       </q-toolbar>
     </q-header>
 
@@ -81,6 +80,15 @@
             <q-item-label caption></q-item-label>
           </q-item-section>
         </q-item>
+        <q-item clickable tag="a" href="/#/register">
+          <q-item-section avatar>
+            <q-icon name="emoji_events" />
+          </q-item-section>
+          <q-item-section>
+            <q-item-label>New admin</q-item-label>
+            <q-item-label caption></q-item-label>
+          </q-item-section>
+        </q-item>
       </q-list>
     </q-drawer>
 
@@ -92,6 +100,7 @@
 
 <script>
 import { openURL } from 'quasar'
+import auth from '../services/auth'
 
 export default {
   name: 'MyLayout',
@@ -101,7 +110,19 @@ export default {
     }
   },
   methods: {
-    openURL
+    openURL,
+    logout () {
+      this.$q.dialog({
+        title: 'Logging out',
+        message: 'Do you wish to logout?',
+        cancel: 'Cancel',
+        ok: 'Yes',
+        color: 'primary'
+      }).onOk(() => {
+        auth.logout()
+        this.$router.go()
+      })
+    }
   }
 }
 </script>

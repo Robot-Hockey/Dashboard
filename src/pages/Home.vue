@@ -1,5 +1,7 @@
 <template>
   <q-page class="flex flex-center">
+    tokenjoj:
+    {{authToken}}
   </q-page>
 </template>
 
@@ -8,6 +10,9 @@
 
 <script>
 export default {
-  name: 'HomePage'
+  name: 'HomePage',
+  data: () => ({
+    authToken: sessionStorage.getItem('auth-token')
+  })
 }
 </script>

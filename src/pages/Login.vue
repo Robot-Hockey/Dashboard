@@ -6,28 +6,24 @@
       class="q-gutter-md fixed-center"
     >
     <h4 style="color: white">Disco Voador</h4>
-      <q-input rounded
+      <q-input
         outlined
-        bg-color="white"
-        color="purple"
-        label="Login"
+        color="white"
+        placeholder="Login"
         v-model="email"
-        lazy-rules
-        :rules="[ val => val && val.length > 0 || 'Insira o login do administrador']"
+        :dense="true"
       />
-      <q-input rounded
+      <q-input
         outlined
-        bg-color="white"
-        color="purple"
+        color="white"
         type="password"
-        label="Senha"
+        placeholder="Senha"
         v-model="password"
-        lazy-rules
-        :rules="[ val => val && val.length > 0 || 'Insira a senha do administrador']"
+        :dense="true"
       />
       <div>
-        <q-btn flat rounded label="Entrar" type="entrar" color="white"/>
-        <q-btn flat rounded label="Esqueceu sua senha?" type="reset" color="white" class="q-ml-sm" />
+        <q-btn flat label="Entrar" type="entrar" color="white"/>
+        <q-btn flat label="Esqueceu sua senha?" type="reset" color="white" class="q-ml-sm" />
       </div>
     </q-form>
   </div>
@@ -37,32 +33,23 @@
 </style>
 
 <script>
+import { mapActions } from 'vuex'
+
 export default {
   data () {
     return {
-      email: null,
-      password: null,
-      accept: false
+      email: '',
+      password: ''
     }
   },
-
   methods: {
+    ...mapActions({ login: 'user/login' }),
     onSubmit () {
-      if (this.accept !== true) {
-        this.$q.notify({
-          color: 'red-5',
-          textColor: 'white',
-          icon: 'fas fa-exclamation-triangle',
-          message: 'You need to accept the license and terms first'
-        })
-      } else {
-        this.$q.notify({
-          color: 'green-4',
-          textColor: 'white',
-          icon: 'fas fa-check-circle',
-          message: 'Submitted'
-        })
+      const data = {
+        email: this.email,
+        password: this.password
       }
+      this.login(data)
     },
     onReset () {
       this.name = null
