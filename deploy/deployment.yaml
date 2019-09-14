@@ -1,27 +1,29 @@
 apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
-  name: echo-ingress
+  name: dashboard-ingress
+  namespace: air-rockey-dashboard
   annotations:  
     certmanager.k8s.io/cluster-issuer: letsencrypt-prod
-    nginx.ingress.kubernetes.io/ssl-redirect: "false"
+    nginx.ingress.kubernetes.io/ssl-redirect: "true"
 spec:
   tls:
   - hosts:
-    - rocket-dashboard.lappis.rocks
+    - rockey-dashboard.lappis.rocks
     secretName: letsencrypt-prod
   rules:
-  - host: rocket-dashboard.lappis.rocks
+  - host: rockey-dashboard.lappis.rocks
     http:
       paths:
       - backend:
-          serviceName: dashboard
+          serviceName: dashboard-service
           servicePort: 80
 ---
 kind: Service
 apiVersion: v1
 metadata:
   name: dashboard-service
+  namespace: air-rockey-dashboard
 spec:
   selector:
     app: dashboard
@@ -35,6 +37,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: dashboard
+  namespace: air-rockey-dashboard
   labels:
     app: dashboard
 spec:
