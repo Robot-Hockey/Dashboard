@@ -5,26 +5,40 @@
       @reset="onReset"
       class="q-gutter-md fixed-center"
     >
-    <h4 style="color: white">Disco Voador</h4>
-      <q-input
-        outlined
-        color="white"
-        placeholder="Login"
-        v-model="email"
-        :dense="true"
-      />
-      <q-input
-        outlined
-        color="white"
-        type="password"
-        placeholder="Senha"
-        v-model="password"
-        :dense="true"
-      />
-      <div>
-        <q-btn flat label="Entrar" type="entrar" color="white"/>
-        <q-btn flat label="Esqueceu sua senha?" type="reset" color="white" class="q-ml-sm" />
-      </div>
+      <q-card class="q-pa-md">
+        <q-card-section>
+          <div class="text-h6">Disco Voador</div>
+        </q-card-section>
+        <q-card-section>
+          <q-input
+            class="q-mt-sm"
+            outlined
+            color="purple"
+            placeholder="Login"
+            v-model="email"
+            :dense="true"
+          />
+          <q-input
+            :dense="true"
+            class="q-mt-sm"
+            outlined v-model="password"
+            color="purple"
+            :type="isPwd ? 'password' : 'text'"
+            placeholder="Senha">
+            <template v-slot:append>
+              <q-icon
+                :name="isPwd ? 'visibility_off' : 'visibility'"
+                class="cursor-pointer"
+                @click="isPwd = !isPwd"
+              />
+            </template>
+          </q-input>
+          <div class="q-mt-md">
+            <q-btn flat label="Entrar" type="entrar" color="purple"/>
+            <q-btn flat label="Esqueceu sua senha?"  type="reset" color="purple" class="q-ml-sm" />
+          </div >
+        </q-card-section>
+      </q-card>
     </q-form>
   </div>
 </template>
@@ -39,7 +53,8 @@ export default {
   data () {
     return {
       email: '',
-      password: ''
+      password: '',
+      isPwd: true
     }
   },
   methods: {
