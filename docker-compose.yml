@@ -3,6 +3,8 @@ services:
   front.service:
     container_name: hockey-dashboard
     build: ./
+    env_file:
+      - .env
     volumes:
       - .:/app
     ports:
