@@ -4,11 +4,43 @@ import auth from '../../services/auth'
 import router from '../../router'
 
 export default {
-  register: (_, data) => {
-    console.log(data)
-    instance.post('/users', { data }).then(res => {
-      console.log(res)
-    })
+  register: (_, data, callback) => {
+    Loading.show()
+    const { name, email, password, company } = data
+    const user = {
+      name,
+      email,
+      password,
+      company_id: company.id
+    }
+    instance
+      .post('/users', { user })
+      .then(res => {
+        Notify.create({
+          message: 'Admin created successfully',
+          color: 'positive'
+        })
+        callback()
+      })
+      .finally(() => Loading.hide())
+  },
+  getCompanies: (_, callback) => {
+    Loading.show()
+    instance
+      .get('/companies')
+      .then(res => {
+        callback(
+          res.data.map(item => ({ ...item, label: item.name, value: item.id }))
+        )
+      })
+      .catch(() => {
+        Notify.create({
+          message: `Error while trying to fetch the companies`,
+          color: 'negative',
+          icon: 'report_problem'
+        })
+      })
+      .finally(() => Loading.hide())
   },
   login (_, data) {
     Loading.show()
@@ -32,6 +64,7 @@ export default {
             })
           })
         })
-      }).finally(() => Loading.hide())
+      })
+      .finally(() => Loading.hide())
   }
 }
