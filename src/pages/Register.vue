@@ -40,7 +40,6 @@ export default {
   methods: {
     ...mapActions({ register: 'user/register', getCompanies: 'user/getCompanies' }),
     callRegister () {
-      console.log('oi')
       const data = {
         name: this.name,
         company: this.company,

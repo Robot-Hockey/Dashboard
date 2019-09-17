@@ -54,7 +54,7 @@ export default {
         return router.push({ name: 'Home' })
       })
       .catch(err => {
-        const { error } = err.response.data
+        const { error } = err.response.data // bad error handling... check later
         Object.entries(error).map(err => {
           err[1].map(e => {
             Notify.create({
