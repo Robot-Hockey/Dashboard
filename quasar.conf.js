@@ -56,6 +56,8 @@ module.exports = function (ctx) {
         'QSelect',
         'QField',
         'QCard',
+        'QCardSection',
+        'QCardActions',
         'QTable',
         'QTh',
         'QTr',

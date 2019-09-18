@@ -3,8 +3,7 @@
     <q-form
       @submit="onSubmit"
       @reset="onReset"
-      class="q-gutter-md fixed-center"
-    >
+      class="q-gutter-md fixed-center">
       <q-card class="q-pa-md">
         <q-card-section>
           <div class="text-h6">Disco Voador</div>
