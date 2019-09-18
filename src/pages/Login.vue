@@ -21,7 +21,8 @@
           <q-input
             :dense="true"
             class="q-mt-sm"
-            outlined v-model="password"
+            outlined
+            v-model="password"
             color="purple"
             :type="isPwd ? 'password' : 'text'"
             placeholder="Senha">
