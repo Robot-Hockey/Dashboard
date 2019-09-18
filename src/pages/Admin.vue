@@ -14,36 +14,40 @@
         </div>
         <div class="col-12 col-md-4 ">
           <div class="q-pa-md">
-            <q-card class="my-card q-pa-md">
-              <q-card-section>
-                <div class="text-h6">Create Admin</div>
-              </q-card-section>
-              <q-card-section>
-                <q-input class="q-pt-md" outlined v-model="name" label="Name" />
-                <q-input class="q-pt-md" outlined v-model="email" label="Email" />
-                <q-input
-                  class="q-mt-sm"
-                  outlined
-                  v-model="password"
-                  :type="isPwd ? 'password' : 'text'"
-                  label="Senha">
-                  <template v-slot:append>
-                    <q-icon
-                      :name="isPwd ? 'visibility_off' : 'visibility'"
-                      class="cursor-pointer"
-                      @click="isPwd = !isPwd"
-                    />
-                  </template>
-                </q-input>
-              </q-card-section>
-              <q-separator inset />
-              <q-card-section>
-                <div class="q-pt-md">
-                  <q-btn label="Submit" type="submit" color="primary"/>
-                  <q-btn @click="callReset" label="Reset" type="reset" color="primary" flat class="q-ml-sm" />
-                </div>
-              </q-card-section>
-            </q-card>
+            <q-form
+            @submit="onSubmit"
+            @reset="onReset">
+              <q-card class="my-card q-pa-md">
+                <q-card-section>
+                  <div class="text-h6">Create Admin</div>
+                </q-card-section>
+                <q-card-section>
+                  <q-input class="q-pt-md" outlined v-model="name" label="Name" />
+                  <q-input class="q-pt-md" outlined v-model="email" label="Email" />
+                  <q-input
+                    class="q-mt-sm"
+                    outlined
+                    v-model="password"
+                    :type="isPwd ? 'password' : 'text'"
+                    label="Senha">
+                    <template v-slot:append>
+                      <q-icon
+                        :name="isPwd ? 'visibility_off' : 'visibility'"
+                        class="cursor-pointer"
+                        @click="isPwd = !isPwd"
+                      />
+                    </template>
+                  </q-input>
+                </q-card-section>
+                <q-separator inset />
+                <q-card-section>
+                  <div class="q-pt-md">
+                    <q-btn label="Submit" type="submit" color="primary"/>
+                    <q-btn label="Reset" type="reset" color="primary" flat class="q-ml-sm" />
+                  </div>
+                </q-card-section>
+              </q-card>
+            </q-form>
           </div>
         </div>
       </div>
@@ -91,16 +95,16 @@ export default {
   }),
   methods: {
     ...mapActions({ register: 'user/register', getAdmins: 'user/getAdmins' }),
-    callRegister () {
+    onSubmit () {
       const data = {
         name: this.name,
-        company: this.company,
+        company: sessionStorage.getItem('company_id'),
         email: this.email,
         password: this.password
       }
-      this.register(data, this.onReset)
+      this.register({ data, cb: this.onReset })
     },
-    callReset () {
+    onReset () {
       this.name = ''
       this.email = ''
       this.password = ''

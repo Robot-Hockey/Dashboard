@@ -4,14 +4,15 @@ import auth from '../../services/auth'
 import router from '../../router'
 
 export default {
-  register: (_, data, callback) => {
+  register: (_, obj) => {
+    const { data, cb } = obj
     Loading.show()
     const { name, email, password, company } = data
     const user = {
       name,
       email,
       password,
-      company_id: company.id
+      company_id: company
     }
     instance
       .post('/users', { user })
@@ -20,7 +21,7 @@ export default {
           message: 'Admin created successfully',
           color: 'positive'
         })
-        callback()
+        cb()
       })
       .finally(() => Loading.hide())
   },
