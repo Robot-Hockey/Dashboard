@@ -5,17 +5,17 @@ const routes = [
     component: () => import('layouts/MyLayout.vue'),
     children: [
       { path: '', name: 'Home', component: () => import('pages/Home.vue') },
-      { path: 'clients', component: () => import('pages/Clients.vue') },
       { path: 'tables', component: () => import('pages/Tables.vue') },
+      { path: 'clients', component: () => import('pages/Clients.vue') },
       { path: 'operations', component: () => import('pages/Operations.vue') },
       { path: 'matches', component: () => import('pages/Matches.vue') },
       { path: 'rank', component: () => import('pages/Rank.vue') }
     ]
   },
   {
-    path: '/register',
+    path: '/admin',
     component: () => import('layouts/MyLayout.vue'),
-    children: [{ path: '', component: () => import('pages/Register.vue') }]
+    children: [{ path: '', component: () => import('pages/Admin.vue') }]
   },
   {
     path: '/login',
