@@ -42,6 +42,24 @@ export default {
       })
       .finally(() => Loading.hide())
   },
+  getAdmins: (_, callback) => {
+    Loading.show()
+    instance
+      .get('/users')
+      .then(res => {
+        callback(
+          res.data
+        )
+      })
+      .catch(() => {
+        Notify.create({
+          message: `Error while trying to fetch the companies`,
+          color: 'negative',
+          icon: 'report_problem'
+        })
+      })
+      .finally(() => Loading.hide())
+  },
   login (_, data) {
     Loading.show()
     instance

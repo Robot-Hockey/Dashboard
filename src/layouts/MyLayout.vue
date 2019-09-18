@@ -35,6 +35,15 @@
             <q-item-label caption></q-item-label>
           </q-item-section>
         </q-item>
+        <q-item clickable tag="a" href="/#/admin">
+          <q-item-section avatar>
+            <q-icon name="person" />
+          </q-item-section>
+          <q-item-section>
+            <q-item-label>Admin</q-item-label>
+            <q-item-label caption></q-item-label>
+          </q-item-section>
+        </q-item>
         <q-item clickable tag="a" href="/#/clients">
           <q-item-section avatar>
             <q-icon name="person" />
@@ -77,15 +86,6 @@
           </q-item-section>
           <q-item-section>
             <q-item-label>Rank</q-item-label>
-            <q-item-label caption></q-item-label>
-          </q-item-section>
-        </q-item>
-        <q-item clickable tag="a" href="/#/register">
-          <q-item-section avatar>
-            <q-icon name="emoji_events" />
-          </q-item-section>
-          <q-item-section>
-            <q-item-label>New admin</q-item-label>
             <q-item-label caption></q-item-label>
           </q-item-section>
         </q-item>
