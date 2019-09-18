@@ -66,9 +66,10 @@ export default {
       .post('/login', { email: data.email, password: data.password })
       .then(res => {
         /* eslint-disable camelcase */
-        const { auth_token } = res.data
+        const { auth_token, user } = res.data
         auth.setToken(auth_token)
-
+        sessionStorage.setItem('company_id', user.company_id)
+        sessionStorage.setItem('username', user.name)
         return router.push({ name: 'Home' })
       })
       .catch(err => {

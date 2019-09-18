@@ -120,6 +120,8 @@ export default {
         color: 'primary'
       }).onOk(() => {
         auth.logout()
+        sessionStorage.setItem('company_id', '')
+        sessionStorage.setItem('username', '')
         this.$router.go()
       })
     }
