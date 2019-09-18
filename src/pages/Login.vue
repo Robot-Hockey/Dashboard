@@ -3,8 +3,7 @@
     <q-form
       @submit="onSubmit"
       @reset="onReset"
-      class="q-gutter-md fixed-center"
-    >
+      class="q-gutter-md fixed-center">
       <q-card class="q-pa-md">
         <q-card-section>
           <div class="text-h6">Disco Voador</div>
@@ -21,7 +20,8 @@
           <q-input
             :dense="true"
             class="q-mt-sm"
-            outlined v-model="password"
+            outlined
+            v-model="password"
             color="purple"
             :type="isPwd ? 'password' : 'text'"
             placeholder="Senha">

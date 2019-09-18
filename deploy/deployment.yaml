@@ -57,3 +57,6 @@ spec:
         image: ${CICD_IMAGE}:${CICD_EXECUTION_SEQUENCE}
         ports:
         - containerPort: 8082
+        env:
+        - name: BASE_URL
+          value: https://rockey-api.lappis.rocks
