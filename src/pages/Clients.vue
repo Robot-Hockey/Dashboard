@@ -41,6 +41,8 @@
 </style>
 
 <script>
+import { mapActions } from 'vuex'
+
 export default {
   name: 'ClientsPage',
   data () {
@@ -55,19 +57,19 @@ export default {
           format: val => `${val}`,
           sortable: true
         },
-        { name: 'emails', align: 'center', label: 'Email', field: 'emails', sortable: true }
+        { name: 'email', align: 'center', label: 'Email', field: 'email', sortable: true }
       ],
-      data: [
-        {
-          name: 'User 1',
-          emails: 'user1@email.com'
-        },
-        {
-          name: 'User 2',
-          emails: 'user2@email.com'
-        }
-      ]
+      data: []
     }
+  },
+  methods: {
+    ...mapActions({ getClients: 'client/getClients' })
+  },
+  beforeMount () {
+    const callback = (data) => {
+      this.data = data
+    }
+    this.getClients(callback)
   }
 }
 </script>
