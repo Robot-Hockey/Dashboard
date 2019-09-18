@@ -21,7 +21,6 @@ Router.beforeEach((to, from, next) => {
     return next()
   }
   if (!auth.getToken()) {
-    console.log('oi')
     return next({ name: 'Login' })
   }
   return next()
