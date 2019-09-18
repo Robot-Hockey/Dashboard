@@ -2,20 +2,19 @@ import { Notify, Loading } from 'quasar'
 import { instance } from '../../services/axios'
 
 export default {
-  register: (_, data, callback) => {
+  register: (_, { data, callback }) => {
     Loading.show()
-    const { name, email, password, company } = data
-    const user = {
+    const { name, email, company } = data
+    const client = {
       name,
       email,
-      password,
-      company_id: company.id
+      company_id: company
     }
     instance
-      .post('/clients', { user })
+      .post('/clients', { client })
       .then(res => {
         Notify.create({
-          message: 'Admin created successfully',
+          message: 'Client created successfully',
           color: 'positive'
         })
         callback()

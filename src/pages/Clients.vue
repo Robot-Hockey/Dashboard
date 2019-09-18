@@ -6,7 +6,7 @@
           <div class="q-pa-md">
             <q-table
               title="Clients"
-              :data="data"
+              :data="clients"
               :columns="columns"
               row-key="name"
             />
@@ -14,22 +14,26 @@
         </div>
         <div class="col-12 col-md-4 ">
           <div class="q-pa-md">
-            <q-card class="my-card q-pa-md">
-              <q-card-section>
-                <div class="text-h6">Create Client</div>
-              </q-card-section>
-              <q-card-section>
-                <q-input class="q-pt-md" outlined v-model="text" label="Name" />
-                <q-input class="q-pt-md" outlined v-model="text" label="Email" />
-              </q-card-section>
-              <q-separator inset />
-              <q-card-section>
-                <div class="q-pt-md">
-                  <q-btn label="Submit" type="submit" color="primary"/>
-                  <q-btn label="Reset" type="reset" color="primary" flat class="q-ml-sm" />
-                </div>
-              </q-card-section>
-            </q-card>
+            <q-form
+            @submit="onSubmit"
+            @reset="onReset">
+              <q-card class="my-card q-pa-md">
+                <q-card-section>
+                  <div class="text-h6">Create Client</div>
+                </q-card-section>
+                <q-card-section>
+                  <q-input class="q-pt-md" outlined v-model="name" label="Name" />
+                  <q-input class="q-pt-md" outlined v-model="email" label="Email" />
+                </q-card-section>
+                <q-separator inset />
+                <q-card-section>
+                  <div class="q-pt-md">
+                    <q-btn label="Submit" type="submit" color="primary"/>
+                    <q-btn label="Reset" type="reset" color="primary" flat class="q-ml-sm" />
+                  </div>
+                </q-card-section>
+              </q-card>
+            </q-form>
           </div>
         </div>
       </div>
@@ -47,6 +51,8 @@ export default {
   name: 'ClientsPage',
   data () {
     return {
+      name: '',
+      email: '',
       columns: [
         {
           name: 'name',
@@ -59,17 +65,39 @@ export default {
         },
         { name: 'email', align: 'center', label: 'Email', field: 'email', sortable: true }
       ],
-      data: []
+      clients: []
     }
   },
   methods: {
-    ...mapActions({ getClients: 'client/getClients' })
+    ...mapActions({ register: 'client/register', getClients: 'client/getClients' }),
+    onSubmit () {
+      const data = {
+        name: this.name,
+        company: sessionStorage.getItem('company_id'),
+        email: this.email
+      }
+      this.register({
+        data,
+        callback: () => {
+          this.onReset()
+          this.getClientsList()
+        }
+      })
+    },
+    onReset () {
+      this.name = ''
+      this.email = ''
+    },
+    getClientsList () {
+      const callback = (clients) => {
+        this.clients = clients
+      }
+      this.getClients(callback)
+    }
+
   },
   beforeMount () {
-    const callback = (data) => {
-      this.data = data
-    }
-    this.getClients(callback)
+    this.getClientsList()
   }
 }
 </script>

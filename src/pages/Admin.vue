@@ -102,19 +102,28 @@ export default {
         email: this.email,
         password: this.password
       }
-      this.register({ data, cb: this.onReset })
+      this.register({
+        data,
+        cb: () => {
+          this.onReset()
+          this.getAdminsList()
+        }
+      })
     },
     onReset () {
       this.name = ''
       this.email = ''
       this.password = ''
+    },
+    getAdminsList () {
+      const changeAdmins = (value) => {
+        this.users = value
+      }
+      this.getAdmins(changeAdmins)
     }
   },
   beforeMount () {
-    const changeAdmins = (value) => {
-      this.users = value
-    }
-    this.getAdmins(changeAdmins)
+    this.getAdminsList()
   }
 }
 </script>
