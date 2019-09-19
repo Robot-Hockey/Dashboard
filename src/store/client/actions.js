@@ -21,13 +21,20 @@ export default {
       })
       .finally(() => Loading.hide())
   },
-  getClients: (_, cb) => {
+  getClients: (_, callback) => {
     Loading.show()
-    instance.get('/clients').then(res => {
-      const { data } = res
-      cb(data)
-    })
-      .catch((err) => console.log(err))
+    instance
+      .get('/clients')
+      .then(res => {
+        callback(res.data)
+      })
+      .catch(() => {
+        Notify.create({
+          message: `Error while trying to fetch the clients`,
+          color: 'negative',
+          icon: 'report_problem'
+        })
+      })
       .finally(() => Loading.hide())
   }
 }

@@ -6,10 +6,18 @@
           <div class="q-pa-md">
             <q-table
               title="Admins"
-              :data="users"
+              :data="admins"
               :columns="columns"
               row-key="name"
+              selection="single"
+              :selected.sync="selected"
             />
+            <div class="q-mt-md">
+              <q-btn @click="onDeleteAdmin()" color="primary" class="block" icon="delete" label="Delete" />
+            </div>
+            <div class="q-mt-md">
+              <!-- Selected: {{ JSON.stringify(selected[0].id) }} -->
+            </div>
           </div>
         </div>
         <div class="col-12 col-md-4 ">
@@ -25,7 +33,7 @@
                   <q-input class="q-pt-md" outlined v-model="name" label="Name" />
                   <q-input class="q-pt-md" outlined v-model="email" label="Email" />
                   <q-input
-                    class="q-mt-sm"
+                    class="q-mt-md"
                     outlined
                     v-model="password"
                     :type="isPwd ? 'password' : 'text'"
@@ -41,7 +49,7 @@
                 </q-card-section>
                 <q-separator inset />
                 <q-card-section>
-                  <div class="q-pt-md">
+                  <div>
                     <q-btn label="Submit" type="submit" color="primary"/>
                     <q-btn label="Reset" type="reset" color="primary" flat class="q-ml-sm" />
                   </div>
@@ -64,6 +72,7 @@ export default {
     email: '',
     password: '',
     isPwd: true,
+    selected: [],
     columns: [
       {
         name: 'name',
@@ -82,19 +91,14 @@ export default {
         sortable: true
       }
     ],
-    users: [
-      {
-        name: 'User 1',
-        email: 'user1@email.com'
-      },
-      {
-        name: 'User 2',
-        email: 'user2@email.com'
-      }
-    ]
+    admins: []
   }),
   methods: {
-    ...mapActions({ register: 'user/register', getAdmins: 'user/getAdmins' }),
+    ...mapActions({
+      register: 'user/register',
+      getAdmins: 'user/getAdmins',
+      deleteAdmin: 'user/deleteAdmin'
+    }),
     onSubmit () {
       const data = {
         name: this.name,
@@ -104,7 +108,7 @@ export default {
       }
       this.register({
         data,
-        cb: () => {
+        callback: () => {
           this.onReset()
           this.getAdminsList()
         }
@@ -116,10 +120,22 @@ export default {
       this.password = ''
     },
     getAdminsList () {
-      const changeAdmins = (value) => {
-        this.users = value
+      const callback = (admins) => {
+        this.admins = admins
       }
-      this.getAdmins(changeAdmins)
+      this.getAdmins(callback)
+    },
+    onDeleteAdmin () {
+      const data = {
+        user_id: this.selected[0].id
+      }
+      this.deleteAdmin({
+        data,
+        callback: () => {
+          this.onReset()
+          this.getAdminsList()
+        }
+      })
     }
   },
   beforeMount () {
