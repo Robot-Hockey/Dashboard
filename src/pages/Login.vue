@@ -1,5 +1,5 @@
 <template >
- <div class="fullscreen flex row q-pa-md" style="background: linear-gradient(to bottom left, #2e0080 0% ,#6b0480 100%)"  >
+ <div class="fullscreen flex row q-pa-md" style="background: linear-gradient(to right, #00c6ff 0% ,#0073FF 100%)"  >
     <q-form
       @submit="onSubmit"
       @reset="onReset"
@@ -12,19 +12,15 @@
           <q-input
             class="q-mt-sm"
             outlined
-            color="purple"
-            placeholder="Login"
+            label="E-mail"
             v-model="email"
-            :dense="true"
           />
           <q-input
-            :dense="true"
             class="q-mt-sm"
             outlined
             v-model="password"
-            color="purple"
             :type="isPwd ? 'password' : 'text'"
-            placeholder="Senha">
+            label="Senha">
             <template v-slot:append>
               <q-icon
                 :name="isPwd ? 'visibility_off' : 'visibility'"
@@ -34,8 +30,8 @@
             </template>
           </q-input>
           <div class="q-mt-md">
-            <q-btn flat label="Entrar" type="entrar" color="purple"/>
-            <q-btn flat label="Esqueceu sua senha?"  type="reset" color="purple" class="q-ml-sm" />
+            <q-btn flat label="Entrar" color="blue" type="entrar"/>
+            <q-btn flat label="Esqueceu sua senha?"  color="blue" type="reset" class="q-ml-sm" />
           </div >
         </q-card-section>
       </q-card>
