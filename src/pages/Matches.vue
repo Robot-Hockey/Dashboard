@@ -8,6 +8,6 @@
 
 <script>
 export default {
-  name: 'ClientsPage'
+  name: 'MatchesPage'
 }
 </script>

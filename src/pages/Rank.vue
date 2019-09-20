@@ -1,5 +1,4 @@
 <template>
-<!-- TROCAR PARA UNS ICONES ADEQUADOS -->
   <div >
      <div class="q-pa-md row items-start q-gutter-md row">
     <q-card class="my-card col">

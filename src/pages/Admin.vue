@@ -34,7 +34,7 @@
                     outlined
                     v-model="password"
                     :type="isPwd ? 'password' : 'text'"
-                    label="Senha">
+                    label="Password">
                     <template v-slot:append>
                       <q-icon
                         :name="isPwd ? 'visibility_off' : 'visibility'"

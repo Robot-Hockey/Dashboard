@@ -6,7 +6,7 @@
       class="q-gutter-md fixed-center">
       <q-card class="q-pa-md">
         <q-card-section>
-          <div class="text-h6">Disco Voador</div>
+          <div class="text-h6">Flying Hockey</div>
         </q-card-section>
         <q-card-section>
           <q-input
@@ -21,7 +21,7 @@
             outlined
             v-model="password"
             :type="isPwd ? 'password' : 'text'"
-            label="Senha">
+            label="Password">
             <template v-slot:append>
               <q-icon
                 :name="isPwd ? 'visibility_off' : 'visibility'"
@@ -31,8 +31,8 @@
             </template>
           </q-input>
           <div class="q-mt-md">
-            <q-btn flat label="Entrar" color="blue" type="entrar"/>
-            <q-btn flat label="Esqueceu sua senha?"  color="blue" type="reset" class="q-ml-sm" />
+            <q-btn flat label="Forgot your password?"  color="blue" type="reset" class="q-ml-sm" />
+            <q-btn label="Login" type="submit" color="blue"/>
           </div >
         </q-card-section>
       </q-card>
@@ -55,7 +55,9 @@ export default {
     }
   },
   methods: {
-    ...mapActions({ login: 'user/login' }),
+    ...mapActions({
+      login: 'user/login'
+    }),
     onSubmit () {
       const data = {
         email: this.email,
