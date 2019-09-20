@@ -7,8 +7,7 @@
           dense
           round
           @click="leftDrawerOpen = !leftDrawerOpen"
-          aria-label="Menu"
-        >
+          aria-label="Menu">
           <q-icon name="menu" />
         </q-btn>
 
@@ -24,8 +23,7 @@
       v-model="leftDrawerOpen"
       show-if-above
       bordered
-      content-class="bg-grey-2"
-    >
+      content-class="bg-grey-2">
       <q-list>
         <q-item clickable tag="a" href="/#/">
           <q-item-section avatar>
