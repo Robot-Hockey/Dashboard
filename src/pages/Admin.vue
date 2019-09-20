@@ -15,9 +15,6 @@
             <div class="q-mt-md">
               <q-btn @click="onDeleteAdmin()" color="primary" class="block" icon="delete" label="Delete" />
             </div>
-            <div class="q-mt-md">
-              <!-- Selected: {{ JSON.stringify(selected[0].id) }} -->
-            </div>
           </div>
         </div>
         <div class="col-12 col-md-4 ">
@@ -31,7 +28,7 @@
                 </q-card-section>
                 <q-card-section>
                   <q-input class="q-pt-md" outlined v-model="name" label="Name" />
-                  <q-input class="q-pt-md" outlined v-model="email" label="Email" />
+                  <q-input class="q-pt-md" outlined type="email" v-model="email" label="Email" />
                   <q-input
                     class="q-mt-md"
                     outlined

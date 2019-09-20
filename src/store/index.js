@@ -3,6 +3,7 @@ import Vuex from 'vuex'
 
 import user from './user'
 import client from './client'
+import table from './table'
 
 Vue.use(Vuex)
 
@@ -15,7 +16,8 @@ export default function (/* { ssrContext } */) {
   const Store = new Vuex.Store({
     modules: {
       user,
-      client
+      client,
+      table
     },
 
     // enable strict mode (adds overhead!)
