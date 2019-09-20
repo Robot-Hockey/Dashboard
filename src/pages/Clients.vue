@@ -9,7 +9,12 @@
               :data="clients"
               :columns="columns"
               row-key="name"
+              selection="single"
+              :selected.sync="selected"
             />
+            <div class="q-mt-md">
+              <q-btn @click="onDeleteClient()" color="primary" class="block" icon="delete" label="Delete" />
+            </div>
           </div>
         </div>
         <div class="col-12 col-md-4 ">
@@ -53,6 +58,7 @@ export default {
     return {
       name: '',
       email: '',
+      selected: [],
       columns: [
         {
           name: 'name',
@@ -69,7 +75,11 @@ export default {
     }
   },
   methods: {
-    ...mapActions({ register: 'client/register', getClients: 'client/getClients' }),
+    ...mapActions({
+      register: 'client/register',
+      getClients: 'client/getClients',
+      deleteClient: 'client/deleteClient'
+    }),
     onSubmit () {
       const data = {
         name: this.name,
@@ -93,8 +103,19 @@ export default {
         this.clients = clients
       }
       this.getClients(callback)
+    },
+    onDeleteClient () {
+      const data = {
+        client_id: this.selected[0].id
+      }
+      this.deleteClient({
+        data,
+        callback: () => {
+          this.onReset()
+          this.getClientsList()
+        }
+      })
     }
-
   },
   beforeMount () {
     this.getClientsList()
