@@ -14,17 +14,17 @@ stages:
         npm install
         npm run lint
 - name: Publish image
+  when:
+    branch: master
   steps:
   - publishImageConfig:
       dockerfilePath: ./Dockerfile
       buildContext: .
       tag: dashboard:${CICD_EXECUTION_SEQUENCE}
 - name: Deploy
+  when:
+    branch: master
   steps:
   - applyYamlConfig:
       path: ./deploy/deployment.yaml
-  when:
-    branch:
-      include:
-      - master
 notification: {}
