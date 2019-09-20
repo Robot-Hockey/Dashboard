@@ -23,7 +23,7 @@
                 </q-card-section>
                 <q-card-section>
                   <q-input class="q-pt-md" outlined v-model="name" label="Name" />
-                  <q-input class="q-pt-md" outlined v-model="email" label="Email" />
+                  <q-input class="q-pt-md" outlined type="email" v-model="email" label="Email" />
                 </q-card-section>
                 <q-separator inset />
                 <q-card-section>

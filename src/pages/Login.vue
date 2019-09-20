@@ -12,6 +12,7 @@
           <q-input
             class="q-mt-sm"
             outlined
+            type="email"
             label="E-mail"
             v-model="email"
           />
