@@ -20,21 +20,42 @@
         <div class="col-12 col-md-4 ">
           <div class="q-pa-md">
             <q-form
-            @submit="onSubmit"
-            @reset="onReset">
+              @submit="onSubmit"
+              @reset="onReset"
+            >
               <q-card class="my-card q-pa-md">
                 <q-card-section>
                   <div class="text-h6">Create Client</div>
                 </q-card-section>
                 <q-card-section>
-                  <q-input class="q-pt-md" outlined v-model="name" label="Name" />
-                  <q-input class="q-pt-md" outlined type="email" v-model="email" label="Email" />
+                  <q-input
+                    class="q-pt-md"
+                    outlined
+                    v-model="name"
+                    label="Name"
+                  />
+                  <q-input
+                    class="q-pt-md"
+                    outlined
+                    v-model="email"
+                    label="Email"
+                  />
                 </q-card-section>
                 <q-separator inset />
                 <q-card-section>
                   <div class="q-pt-md">
-                    <q-btn label="Submit" type="submit" color="primary"/>
-                    <q-btn label="Reset" type="reset" color="primary" flat class="q-ml-sm" />
+                    <q-btn
+                      label="Submit"
+                      type="submit"
+                      color="primary"
+                    />
+                    <q-btn
+                      label="Reset"
+                      type="reset"
+                      color="primary"
+                      flat
+                      class="q-ml-sm"
+                    />
                   </div>
                 </q-card-section>
               </q-card>

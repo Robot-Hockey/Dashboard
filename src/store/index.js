@@ -4,6 +4,7 @@ import Vuex from 'vuex'
 import user from './user'
 import client from './client'
 import table from './table'
+import operation from './operation'
 
 Vue.use(Vuex)
 
@@ -17,7 +18,8 @@ export default function (/* { ssrContext } */) {
     modules: {
       user,
       client,
-      table
+      table,
+      operation
     },
 
     // enable strict mode (adds overhead!)
