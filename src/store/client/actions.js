@@ -36,5 +36,27 @@ export default {
         })
       })
       .finally(() => Loading.hide())
+  },
+  deleteClient: (_, { data, callback }) => {
+    Loading.show()
+    /* eslint-disable camelcase */
+    const { client_id } = data
+    instance
+      .delete('/clients/' + client_id)
+      .then(res => {
+        Notify.create({
+          message: 'Client deleted successfully',
+          color: 'positive'
+        })
+        callback()
+      })
+      .catch(() => {
+        Notify.create({
+          message: `Error while trying to delete client`,
+          color: 'negative',
+          icon: 'report_problem'
+        })
+      })
+      .finally(() => Loading.hide())
   }
 }
