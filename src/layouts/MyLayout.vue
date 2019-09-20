@@ -7,16 +7,15 @@
           dense
           round
           @click="leftDrawerOpen = !leftDrawerOpen"
-          aria-label="Menu"
-        >
+          aria-label="Menu">
           <q-icon name="menu" />
         </q-btn>
 
         <q-toolbar-title>
-          Web Dashboard
+          Air Hockey Dashboard
         </q-toolbar-title>
-        <q-btn  @click="logout()" round dense flat icon="notifications" class="q-mr-md" />
-        <q-btn round dense flat icon="exit_to_app" class="q-mr-xs" />
+        <q-btn round dense flat icon="notifications" class="q-mr-md" />
+        <q-btn @click="logout()" round dense flat icon="exit_to_app" class="q-mr-xs" />
       </q-toolbar>
     </q-header>
 
@@ -113,6 +112,7 @@ export default {
   methods: {
     openURL,
     logout () {
+      console.log('heyy')
       this.$q.dialog({
         title: 'Logging out',
         message: 'Do you wish to logout?',
