@@ -27,6 +27,14 @@ export default {
   data: () => ({
     columns: [
       {
+        name: 'name',
+        required: true,
+        label: 'Client name',
+        align: 'left',
+        field: 'name',
+        sortable: true
+      },
+      {
         name: 'card_id',
         required: true,
         label: 'Card id',
