@@ -15,7 +15,8 @@
         <q-toolbar-title>
           Web Dashboard
         </q-toolbar-title>
-        <q-btn  @click="logout()" round dense icon="exit_to_app" class="q-mr-xs" />
+        <q-btn  @click="logout()" round dense flat icon="notifications" class="q-mr-md" />
+        <q-btn round dense flat icon="exit_to_app" class="q-mr-xs" />
       </q-toolbar>
     </q-header>
 
@@ -37,7 +38,7 @@
         </q-item>
         <q-item clickable tag="a" href="/#/admin">
           <q-item-section avatar>
-            <q-icon name="person" />
+            <q-icon name="how_to_reg" />
           </q-item-section>
           <q-item-section>
             <q-item-label>Admin</q-item-label>
@@ -46,7 +47,7 @@
         </q-item>
         <q-item clickable tag="a" href="/#/clients">
           <q-item-section avatar>
-            <q-icon name="person" />
+            <q-icon name="people_alt" />
           </q-item-section>
           <q-item-section>
             <q-item-label>Clients</q-item-label>
@@ -64,7 +65,7 @@
         </q-item>
         <q-item clickable tag="a" href="/#/operations">
           <q-item-section avatar>
-            <q-icon name="receipt" />
+            <q-icon name="shop" />
           </q-item-section>
           <q-item-section>
             <q-item-label>Operations</q-item-label>
