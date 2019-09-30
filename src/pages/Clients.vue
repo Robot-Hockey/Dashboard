@@ -126,15 +126,24 @@ export default {
       this.getClients(callback)
     },
     onDeleteClient () {
-      const data = {
-        client_id: this.selected[0].id
-      }
-      this.deleteClient({
-        data,
-        callback: () => {
-          this.onReset()
-          this.getClientsList()
+      this.$q.dialog({
+        title: 'Delete Client',
+        message: 'Do you wish to delete this client?',
+        cancel: 'Cancel',
+        ok: 'Yes',
+        color: 'primary'
+      }).onOk(() => {
+        const data = {
+          client_id: this.selected[0].id
         }
+        this.deleteClient({
+          data,
+          callback: () => {
+            this.onReset()
+            this.getClientsList()
+          }
+        })
+        this.$router.go()
       })
     }
   },

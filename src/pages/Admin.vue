@@ -123,15 +123,24 @@ export default {
       this.getAdmins(callback)
     },
     onDeleteAdmin () {
-      const data = {
-        user_id: this.selected[0].id
-      }
-      this.deleteAdmin({
-        data,
-        callback: () => {
-          this.onReset()
-          this.getAdminsList()
+      this.$q.dialog({
+        title: 'Delete Admin',
+        message: 'Do you wish to delete this admin user?',
+        cancel: 'Cancel',
+        ok: 'Yes',
+        color: 'primary'
+      }).onOk(() => {
+        const data = {
+          user_id: this.selected[0].id
         }
+        this.deleteAdmin({
+          data,
+          callback: () => {
+            this.onReset()
+            this.getAdminsList()
+          }
+        })
+        this.$router.go()
       })
     }
   },

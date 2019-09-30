@@ -111,7 +111,6 @@ export default {
   methods: {
     openURL,
     logout () {
-      console.log('heyy')
       this.$q.dialog({
         title: 'Logging out',
         message: 'Do you wish to logout?',

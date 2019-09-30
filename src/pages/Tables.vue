@@ -120,15 +120,24 @@ export default {
       this.getClients(callback)
     },
     onDeleteTable () {
-      const data = {
-        table_id: this.selected[0].id
-      }
-      this.deleteTable({
-        data,
-        callback: () => {
-          this.onReset()
-          this.getTablesList()
+      this.$q.dialog({
+        title: 'Delete Table',
+        message: 'Do you wish to delete this table?',
+        cancel: 'Cancel',
+        ok: 'Yes',
+        color: 'primary'
+      }).onOk(() => {
+        const data = {
+          table_id: this.selected[0].id
         }
+        this.deleteTable({
+          data,
+          callback: () => {
+            this.onReset()
+            this.getTablesList()
+          }
+        })
+        this.$router.go()
       })
     }
   },
