@@ -1,4 +1,3 @@
-
 const routes = [
   {
     path: '/',
@@ -7,6 +6,11 @@ const routes = [
       { path: '', name: 'Home', component: () => import('pages/Home.vue') },
       { path: 'tables', component: () => import('pages/Tables.vue') },
       { path: 'clients', component: () => import('pages/Clients.vue') },
+      {
+        path: 'clients/:id',
+        component: () => import('pages/SingleClient.vue'),
+        props: true
+      },
       { path: 'operations', component: () => import('pages/Operations.vue') },
       { path: 'matches', component: () => import('pages/Matches.vue') },
       { path: 'rank', component: () => import('pages/Rank.vue') }

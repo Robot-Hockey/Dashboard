@@ -8,13 +8,51 @@
               title="Clients"
               :data="clients"
               :columns="columns"
-              row-key="name"
-              selection="single"
-              :selected.sync="selected"
-            />
-            <div class="q-mt-md">
-              <q-btn @click="onDeleteClient()" color="primary" class="block" icon="delete" label="Delete" />
-            </div>
+              row-key="more"
+            >
+              <template v-slot:body="props">
+                <q-tr :props="props">
+                  <q-td
+                    key="name"
+                    :props="props"
+                  >
+                    {{ props.row.name }}
+                  </q-td>
+                  <q-td
+                    key="email"
+                    :props="props"
+                  >
+                    <q-badge color="green">
+                      {{ props.row.email }}
+                    </q-badge>
+                  </q-td>
+                  <q-td
+                    key="more"
+                    :props="props"
+                  >
+                    <q-btn
+                      color="purple"
+                      @click="$router.replace(`/clients/${props.row.id}`)"
+                    >
+                      show more
+                    </q-btn>
+                  </q-td>
+
+                  <q-td
+                    key="delete"
+                    :props="props"
+                  >
+                    <q-btn
+                      color="red"
+                      @click="onDeleteClient(props.row.id)"
+                    >
+                      delete
+                    </q-btn>
+                  </q-td>
+                </q-tr>
+              </template>
+
+            </q-table>
           </div>
         </div>
         <div class="col-12 col-md-4 ">
@@ -40,6 +78,7 @@
                     v-model="email"
                     label="Email"
                   />
+
                 </q-card-section>
                 <q-separator inset />
                 <q-card-section>
@@ -81,16 +120,15 @@ export default {
       email: '',
       selected: [],
       columns: [
-        {
-          name: 'name',
-          required: true,
-          label: 'Name',
-          align: 'left',
-          field: row => row.name,
-          format: val => `${val}`,
-          sortable: true
-        },
-        { name: 'email', align: 'center', label: 'Email', field: 'email', sortable: true }
+        { name: 'name', align: 'center', label: 'Name', field: 'name', sortable: true },
+        { name: 'email', align: 'center', label: 'Email', field: 'email', sortable: true },
+        { name: 'more',
+          align: 'center',
+          label: 'See more',
+          field: row => row.id,
+          sortable: false },
+        { name: 'delete', align: 'center', label: 'Delete', field: row => row.id, sortable: false }
+
       ],
       clients: []
     }
@@ -121,11 +159,15 @@ export default {
     },
     getClientsList () {
       const callback = (clients) => {
-        this.clients = clients
+        const mappedData = clients.map(item => ({
+          ...item,
+          name: item.name || ''
+        }))
+        this.clients = mappedData
       }
       this.getClients(callback)
     },
-    onDeleteClient () {
+    onDeleteClient (id) {
       this.$q.dialog({
         title: 'Delete Client',
         message: 'Do you wish to delete this client?',
@@ -134,7 +176,7 @@ export default {
         color: 'primary'
       }).onOk(() => {
         const data = {
-          client_id: this.selected[0].id
+          client_id: id
         }
         this.deleteClient({
           data,
@@ -143,7 +185,6 @@ export default {
             this.getClientsList()
           }
         })
-        this.$router.go()
       })
     }
   },
